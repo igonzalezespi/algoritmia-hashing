@@ -6,16 +6,62 @@
 
 1509472948 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\project\hashing.h
 
-1509480427 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\main.c
-	"hashing.h"
+1509486101 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\main.c
 	<stdio.h>
 	<stdlib.h>
+	"hashing.h"
 
-1509480297 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\hashing.h
+1509486060 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\hashing.h
 
 1509480470 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\hashing.c
 	"hashing.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
+
+1509485702 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_clave.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"h_clave.h"
+
+1509485304 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_clave.h
+	"h_utils.h"
+
+1509485694 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_lineal.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"h_lineal.h"
+
+1509485136 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_lineal.h
+	"h_utils.h"
+
+1509485351 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_utils.h
+
+1509485442 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\h_utils.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"h_lineal.h"
+	"h_clave.h"
+	"h_utils.h"
+
+1509486100 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\clave.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"clave.h"
+
+1509486101 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\clave.h
+	"hashing.h"
+
+1509486101 source:c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\lineal.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"lineal.h"
+
+1509486101 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\lineal.h
+	"hashing.h"
 
