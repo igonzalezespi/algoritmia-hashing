@@ -6,11 +6,13 @@
 
 int main(int argc, char *argv[]) {
   myreg myhash[TAM];
-  myreg reg1, reg2, reg3;
+  myreg reg1, reg2, reg3, reg4, reg5;
 
   reg1.key = 10;
-  reg2.key = 20;
-  reg3.key = 11;
+  reg2.key = 41;
+  reg3.key = 30;
+  reg4.key = 49;
+  reg5.key = 50;
 
 
 
@@ -18,10 +20,12 @@ int main(int argc, char *argv[]) {
   h_insert(reg1, myhash, TAM);
   h_insert(reg2, myhash, TAM);
   h_insert(reg3, myhash, TAM);
+  h_insert(reg4, myhash, TAM);
+  h_insert(reg5, myhash, TAM);
 
   h_show(myhash, TAM);
 
-  h_remove(10, myhash, TAM);
+  h_remove(41, myhash, TAM);
 
   h_show(myhash, TAM);
 

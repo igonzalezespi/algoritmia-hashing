@@ -6,7 +6,7 @@ typedef struct myreg {
 } myreg;
 
 void h_init(myreg t_hash[], int tam);
-void h_insert(myreg r, myreg t_hash[], int tam);
+int h_insert(myreg r, myreg t_hash[], int tam);
 int h_search(int v, myreg t_hash[], int tam);
 int h_remove(int v, myreg t_hash[], int tam);
 float h_loadfactor(myreg t_hash[], int tam);
