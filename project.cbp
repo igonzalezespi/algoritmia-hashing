@@ -31,10 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="clave.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="clave.h" />
 		<Unit filename="hashing.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="hashing.h" />
+		<Unit filename="lineal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lineal.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
