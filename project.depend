@@ -65,3 +65,36 @@
 1509486101 c:\users\ivann\onedrive - alu.ucam.edu\universidad\semestre 1\alg - algoritmia\parcial 1\1. hashing\tarea\projectgit\lineal.h
 	"hashing.h"
 
+1509529612 source:c:\c_projects\hashing\clave.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"clave.h"
+
+1509486101 c:\c_projects\hashing\clave.h
+	"hashing.h"
+
+1509486060 c:\c_projects\hashing\hashing.h
+
+1509486134 source:c:\c_projects\hashing\hashing.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"lineal.h"
+	"clave.h"
+	"hashing.h"
+
+1509486101 c:\c_projects\hashing\lineal.h
+	"hashing.h"
+
+1509529473 source:c:\c_projects\hashing\lineal.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"lineal.h"
+
+1509529281 source:c:\c_projects\hashing\main.c
+	<stdio.h>
+	<stdlib.h>
+	"hashing.h"
+

@@ -6,7 +6,7 @@
 
 int G_lineal(int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
   // G es: Prueba lineal
-  int g = h + i;
+  int g = (h + i) % tam;
 
   if (i > tam) {
     return -1; // No se encuentra/No se puede insertar

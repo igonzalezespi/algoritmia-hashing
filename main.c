@@ -3,7 +3,7 @@
 
 #include "hashing.h"
 
-#define TAM 10
+#define TAM 8
 
 int main(int argc, char *argv[]) {
   int pos;
@@ -19,19 +19,19 @@ int main(int argc, char *argv[]) {
 
 
   h_init(myhash, TAM);
-  h_insert(reg1, myhash, TAM, "lineal");
-  h_insert(reg2, myhash, TAM, "lineal");
-  h_insert(reg3, myhash, TAM, "lineal");
-  h_insert(reg4, myhash, TAM, "lineal");
-  h_insert(reg5, myhash, TAM, "lineal");
+  h_insert(reg1, myhash, TAM, "clave");
+  h_insert(reg2, myhash, TAM, "clave");
+  h_insert(reg3, myhash, TAM, "clave");
+  h_insert(reg4, myhash, TAM, "clave");
+  h_insert(reg5, myhash, TAM, "clave");
 
   h_show(myhash, TAM);
 
-  h_remove(41, myhash, TAM, "lineal");
+  h_remove(41, myhash, TAM, "clave");
 
   h_show(myhash, TAM);
 
-  pos = h_search(11, myhash, TAM, "lineal");
+  pos = h_search(11, myhash, TAM, "clave");
   printf("El valor 11 esta en la pos %d de la tabla\n",pos);
 
 
