@@ -36,8 +36,11 @@ int G_clave(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int 
 int H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   // H es: módulo con el tamaño total
   int h = key % tam;
+  int i = 0;
   printf("----------\n");
   printf("H: %d\n", h);
-  return G_clave(key, t_hash, tam, tipo, h, 0);
+  int pos = G_clave(key, t_hash, tam, tipo, h, i);
+  printf("Intentos: %d\n", i);
+  return pos;
 }
 

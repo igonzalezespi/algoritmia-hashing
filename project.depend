@@ -94,12 +94,11 @@
 	<string.h>
 	"lineal.h"
 
-1509550163 source:c:\c_projects\hashing\main.c
+1509550738 source:c:\c_projects\hashing\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"hashing.h"
-	"fichero.h"
 
 1509547618 source:c:\c_projects\hashing\fichero.c
 	<stdio.h>

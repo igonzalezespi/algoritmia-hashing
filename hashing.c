@@ -35,7 +35,7 @@ int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
     return 1;
   }
   printf("ERROR insertando coche \"%s\"\n", r.matricula);
-  return pos; // No se puede insertar, devuelve código error
+  return pos;
 }
 
 int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]) {
@@ -80,7 +80,7 @@ int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[
       i++;
     }
     h_insert(reg, t_hash, tam, prueba);
-//    system("PAUSE");     // COMENTAR PARA EJECUCION REAL
+//    system("PAUSE");
   }
   printf("\n");
   printf("\n");
@@ -103,7 +103,7 @@ int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
     return 1;
   }
   printf("ERROR borrando coche \"%s\"\n", matricula);
-  return pos; // No se puede borrar, devuelve código error
+  return pos;
 }
 
 // N/M, donde N es el numero de elemento insertados
