@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <limits.h>
 
 #include "lineal.h"
 #include "clave.h"
@@ -29,7 +28,6 @@ int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
 
   r.key = get_key(r.matricula);
   pos = hashing(r.key, t_hash, tam, "insert", prueba);
-  printf("POS: %d\n", pos);
   if (pos >= 0) {
     t_hash[pos] = r;
     return 1;

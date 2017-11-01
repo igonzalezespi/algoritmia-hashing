@@ -12,7 +12,6 @@ int main(int argc, char *argv[]) {
 
   strcpy(reg1.matricula, "7360AAA");
   reg1.key = get_key(reg1.matricula);
-  printf("KEY: %ul", reg1.key);
   strcpy(reg1.marca, "Buick");
   strcpy(reg1.modelo, "Park Avenue");
   reg1.anyo = 1998;
