@@ -66,7 +66,11 @@ void h_show(myreg t_hash[], int tam) {
   int i;
 
   for(i = 0; i < tam; i++) {
-    printf("| %d", t_hash[i].key);
+    if (t_hash[i].key >= 0) {
+      printf("| %s", t_hash[i].matricula);
+    } else {
+      printf("|        ");
+    }
   }
   printf("|\n");
 }

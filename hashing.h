@@ -3,9 +3,15 @@
 
 #define LIBRE -1
 #define BORRADO -2
+#define MAX_LENGTH 250
 
 typedef struct myreg {
   int key;
+  char matricula[8];
+  char marca[MAX_LENGTH];
+  char modelo[MAX_LENGTH];
+  int anyo;
+  int precio;
 } myreg;
 
 void h_init(myreg t_hash[], int tam);
