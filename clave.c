@@ -12,6 +12,10 @@ int G_clave(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int 
   }
   int g = (h + (d * i)) % tam;
 
+  if (i != 0) {
+    printf("G: %d\n", g);
+  }
+
   if (i > tam) {
     return -1; // No se encuentra/No se puede insertar
   }
@@ -32,6 +36,8 @@ int G_clave(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int 
 int H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   // H es: módulo con el tamaño total
   int h = key % tam;
+  printf("----------\n");
+  printf("H: %d\n", h);
   return G_clave(key, t_hash, tam, tipo, h, 0);
 }
 

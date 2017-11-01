@@ -21,6 +21,7 @@ void h_init(myreg t_hash[], int tam) {
   for (i=0; i < tam; i++) {
     t_hash[i].key = LIBRE;
   }
+  printf("Tabla inicializada\n");
 }
 
 int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
@@ -30,9 +31,62 @@ int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
   pos = hashing(r.key, t_hash, tam, "insert", prueba);
   if (pos >= 0) {
     t_hash[pos] = r;
+    printf("Insertado coche \"%s\"\n", r.matricula);
     return 1;
   }
+  printf("ERROR insertando coche \"%s\"\n", r.matricula);
   return pos; // No se puede insertar, devuelve código error
+}
+
+int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]) {
+  char linea[500]; // Para guardar la linea de cada fichero
+  char *token;     // Para cada token de cada linea
+  int i;
+
+  //Abrimos el fichero
+  FILE *fp = fopen(nombre_fichero,"r");
+
+  // Comprobar que no hay error al abrir
+  if(fp == NULL) {
+    printf("Error de lectura del archivo");
+    return -1;
+  }
+
+  // Recorremos cada linea del fichero
+  while(fgets(linea,500,fp)!=NULL) {
+    myreg reg;
+    i = 0;
+//    printf("Linea leida: %s\n", linea);
+    token = strtok(linea,","); // Separamos cada linea por ","
+    while (token != NULL) {
+      switch (i) {
+      case 0:
+        strncpy(reg.matricula, token, MATRICULA_LENGTH);
+        break;
+      case 1:
+        strncpy(reg.modelo, token, MAX_LENGTH);
+        break;
+      case 2:
+        strncpy(reg.marca, token, MAX_LENGTH);
+        break;
+      case 3:
+        reg.anyo = atoi(token);
+        break;
+      case 4:
+        reg.precio = atoi(token);
+        break;
+      }
+      token = strtok(NULL, ",");  // Siguiente token en la linea (si quedan)
+      i++;
+    }
+    h_insert(reg, t_hash, tam, prueba);
+//    system("PAUSE");     // COMENTAR PARA EJECUCION REAL
+  }
+  printf("\n");
+  printf("\n");
+  printf("Fichero insertado en la tabla.\n");
+  printf("Factor de capacidad: %f\n", h_loadfactor(t_hash, tam));
+  return 0;
 }
 
 int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]) {
@@ -45,8 +99,10 @@ int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
   pos = hashing(get_key(matricula), t_hash, tam, "remove", prueba);
   if (pos >= 0) {
     t_hash[pos].key = BORRADO;
+    printf("Borrado coche \"%s\"\n", matricula);
     return 1;
   }
+  printf("ERROR borrando coche \"%s\"\n", matricula);
   return pos; // No se puede borrar, devuelve código error
 }
 

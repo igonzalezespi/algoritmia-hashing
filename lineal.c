@@ -8,6 +8,9 @@ int G_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int
   // G es: Prueba lineal
   int g = (h + i) % tam;
 
+  if (i != 0) {
+    printf("G: %d\n", g);
+  }
   if (i > tam) {
     return -1; // No se encuentra/No se puede insertar
   }
@@ -28,6 +31,8 @@ int G_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int
 int H_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   // H es: módulo con el tamaño total
   int h = key % tam;
+  printf("----------\n");
+  printf("H: %d\n", h);
   return G_lineal(key, t_hash, tam, tipo, h, 0);
 }
 
