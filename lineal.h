@@ -3,6 +3,6 @@
 
 #include "hashing.h"
 
-int H_lineal(int key, myreg t_hash[], int tam, char tipo[]);
+int H_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[]);
 
 #endif

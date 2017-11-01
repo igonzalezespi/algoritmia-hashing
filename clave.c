@@ -4,7 +4,7 @@
 
 #include "clave.h"
 
-int G_clave(unsigned int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
+int G_clave(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int i) {
   // G es: Prueba dependiente de clave
   unsigned long d = (unsigned long)(key / tam); // Se toma la parte entera automáticamente (FLOOR)
   if (d % 2 == 0 || d == 0) { // Impar mayor que cero para recorrer toda la tabla
@@ -29,7 +29,7 @@ int G_clave(unsigned int key, myreg t_hash[], int tam, char tipo[], int h, int i
   return G_clave(key, t_hash, tam, tipo, h, i + 1);
 }
 
-int H_clave(int key, myreg t_hash[], int tam, char tipo[]) {
+int H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   // H es: módulo con el tamaño total
   int h = key % tam;
   return G_clave(key, t_hash, tam, tipo, h, 0);

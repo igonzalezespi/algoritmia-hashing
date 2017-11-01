@@ -32,7 +32,7 @@ int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
     t_hash[pos] = r;
     return 1;
   }
-  return pos; // No se puede insertar
+  return pos; // No se puede insertar, devuelve código error
 }
 
 int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]) {
@@ -47,7 +47,7 @@ int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
     t_hash[pos].key = BORRADO;
     return 1;
   }
-  return pos; // No se puede borrar
+  return pos; // No se puede borrar, devuelve código error
 }
 
 // N/M, donde N es el numero de elemento insertados
@@ -109,10 +109,6 @@ unsigned long get_key(char matricula[]) {
   int i, j;
 
   strcpy(key, "0000000000"); // Inicializo el string
-
-  if (strlen(matricula) != mat_len) { // Tiene que ser de este tamaño obligatoriamente
-    return 0;
-  }
 
   /*
    * Copiamos los valores ascii de las letras

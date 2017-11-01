@@ -4,7 +4,7 @@
 
 #include "lineal.h"
 
-int G_lineal(int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
+int G_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[], int h, int i) {
   // G es: Prueba lineal
   int g = (h + i) % tam;
 
@@ -25,7 +25,7 @@ int G_lineal(int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
   return G_lineal(key, t_hash, tam, tipo, h, i + 1);
 }
 
-int H_lineal(int key, myreg t_hash[], int tam, char tipo[]) {
+int H_lineal(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   // H es: módulo con el tamaño total
   int h = key % tam;
   return G_lineal(key, t_hash, tam, tipo, h, 0);
