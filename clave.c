@@ -4,9 +4,10 @@
 
 #include "clave.h"
 
-int G_clave(int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
+int G_clave(unsigned int key, myreg t_hash[], int tam, char tipo[], int h, int i) {
   // G es: Prueba dependiente de clave
-  int d = (int)(key / tam); // Se toma la parte entera automáticamente (FLOOR)
+  printf("COLISION: %d\n", i);
+  unsigned long d = (unsigned long)(key / tam); // Se toma la parte entera automáticamente (FLOOR)
   if (d % 2 == 0 || d == 0) { // Impar mayor que cero para recorrer toda la tabla
     d += 1;
   }

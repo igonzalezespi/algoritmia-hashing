@@ -1,12 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <limits.h>
 
 #include "lineal.h"
 #include "clave.h"
 #include "hashing.h"
 
-int hashing(int key, myreg t_hash[], int tam, char tipo[], char prueba[]) {
+int hashing(unsigned long key, myreg t_hash[], int tam, char tipo[], char prueba[]) {
   if (strcmp(prueba, "lineal") == 0) {
     return H_lineal(key, t_hash, tam, tipo);
   } else if (strcmp(prueba, "clave") == 0) {
@@ -17,7 +19,7 @@ int hashing(int key, myreg t_hash[], int tam, char tipo[], char prueba[]) {
 
 void h_init(myreg t_hash[], int tam) {
   int i;
-  for(i=0; i < tam; i++) {
+  for (i=0; i < tam; i++) {
     t_hash[i].key = LIBRE;
   }
 }
@@ -25,22 +27,24 @@ void h_init(myreg t_hash[], int tam) {
 int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
   int pos;
 
+  r.key = get_key(r.matricula);
   pos = hashing(r.key, t_hash, tam, "insert", prueba);
-  if(pos >= 0) {
+  printf("POS: %d\n", pos);
+  if (pos >= 0) {
     t_hash[pos] = r;
     return 1;
   }
   return pos; // No se puede insertar
 }
 
-int h_search(int v, myreg t_hash[], int tam, char prueba[]) {
-  return hashing(v, t_hash, tam, "search", prueba);
+int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]) {
+  return hashing(get_key(matricula), t_hash, tam, "search", prueba);
 }
 
-int h_remove(int v, myreg t_hash[], int tam, char prueba[]) {
+int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
   int pos;
 
-  pos = hashing(v, t_hash, tam, "remove", prueba);
+  pos = hashing(get_key(matricula), t_hash, tam, "remove", prueba);
   if (pos >= 0) {
     t_hash[pos].key = BORRADO;
     return 1;
@@ -55,8 +59,9 @@ float h_loadfactor(myreg t_hash[], int tam) {
   int i;
 
   for (i = 0; i < tam; i++) {
-    if (t_hash[i].key != LIBRE && t_hash[i].key != BORRADO)
+    if (t_hash[i].key != LIBRE && t_hash[i].key != BORRADO) {
       n_elems++;
+    }
   }
 
   return ((float)n_elems/tam);
@@ -66,11 +71,71 @@ void h_show(myreg t_hash[], int tam) {
   int i;
 
   for(i = 0; i < tam; i++) {
-    if (t_hash[i].key >= 0) {
-      printf("| %s", t_hash[i].matricula);
+    if (t_hash[i].key == LIBRE) {
+      printf("|   libre");
+    } else if (t_hash[i].key == BORRADO) {
+      printf("| borrado");
     } else {
-      printf("|        ");
+      printf("| %s", t_hash[i].matricula);
     }
   }
   printf("|\n");
 }
+
+
+void char_int_value(char str_val[], char letra) {
+  // A valor ASCII. Garantizado que funcione por el estandar
+  int val = toupper(letra) - '0'; // Convertimos a MAYUS para asegurar dos dígitos
+  sprintf(str_val, "%d", val); // Guardando el INT en formato CHAR
+}
+
+unsigned long get_key(char matricula[]) {
+  /*
+   * El propósito de esta función es convertir la matrícula en un identificador
+   * numérico único (sin perder el caracter único de las matrículas).
+   * Vamos a convertir la matrícula en un número.
+   * Para ello vamos a convertir las letras de la matrícula en ASCII
+   * Luego de hacer esto, le concatenaremos los números al final.
+   * De este modo conseguiremos:
+   *   Matrícula: 9999ZZZ
+   *   Valor final: 4242429999  (Siendo Z = 42)
+   * Este valor, y teniendo en cuenta que ese sería el valor máximo,
+   * podremos castear ese string en un "unsigned long", cuyo valor máximo es:
+   * 4294967295
+   * Que como vemos, es mayor que el máximo posible.
+   */
+  const int mat_len = 7; // Matrícula = 4 numeros + 3 letras
+  const int key_len = 10; // Por cada letra se cuentan 2 (valor ascii)
+  char key[key_len + 1];
+  unsigned long key_final = 0;
+  int i, j;
+
+  strcpy(key, "0000000000"); // Inicializo el string
+
+  if (strlen(matricula) != mat_len) { // Tiene que ser de este tamaño obligatoriamente
+    return 0;
+  }
+
+  /*
+   * Copiamos los valores ascii de las letras
+   * El valor numérico desde la A hasta la Z es siempre de dos dígitos
+  */
+  for (i = 0, j = 4; j <= mat_len - 1; i = i + 2, j++) {
+    // i: Recorre "key", como cada letra son dos dígitos, va de dos en dos
+    // j: Recorre "matricula", de uno en uno ya que son las letras, no dígitos
+    char letra[3]; // Dos dígitos + \0
+    char_int_value(letra, matricula[j]); // Ahora tendríamos el "42\0" si fuese una "Z"
+
+    key[i] = letra[0];
+    key[i + 1] = letra[1];
+  }
+  // Copiamos los números
+  // (No se convierte a ASCII para ahorrar memoria, solo necesitamos un INT al final)
+  for (i = 6, j = 0; j <= 3; i++, j++) {
+    // "key" ya tiene 3 letras, que son dos dígitos, por lo tanto 3*2=6 [6, 9]
+    // Los números de la "matricula" empiezan en la posición 0 y son 4. [0, 3]
+    key[i] = matricula[j];
+  }
+  key_final = strtoul(key, NULL, 0);
+  return key_final;
+};
