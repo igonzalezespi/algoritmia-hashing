@@ -14,12 +14,9 @@ int main(int argc, char *argv[]) {
 
   h_init(tabla_lineal, TAM_LINEAL);
   h_insert_fichero("coches.csv", tabla_lineal, TAM_LINEAL, "lineal");
-  printf("\n");
-  printf("========= Tabla lineal =========\n");
-  printf("\n");
   h_show(tabla_lineal, TAM_LINEAL);
-  printf("\n");
-  printf("\n");
+
+  system("PAUSE");
 
   h_init(tabla_clave, TAM_CLAVE);
   h_insert_fichero("coches.csv", tabla_clave, TAM_CLAVE, "clave");

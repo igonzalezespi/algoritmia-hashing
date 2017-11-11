@@ -15,11 +15,16 @@ typedef struct myreg {
   int precio;
 } myreg;
 
+typedef struct hash_result {
+  int pos;
+  int intentos;
+} hash_result;
+
 void h_init(myreg t_hash[], int tam);
-int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]);
-int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]);
+hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fichero);
+void h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]);
 int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]);
-int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]);
+void h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]);
 float h_loadfactor(myreg t_hash[], int tam);
 void h_show(myreg t_hash[], int tam);
 

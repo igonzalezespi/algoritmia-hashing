@@ -3,6 +3,6 @@
 
 #include "hashing.h"
 
-int H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]);
+hash_result H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]);
 
 #endif

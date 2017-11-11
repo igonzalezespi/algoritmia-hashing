@@ -7,49 +7,62 @@
 #include "clave.h"
 #include "hashing.h"
 
-int hashing(unsigned long key, myreg t_hash[], int tam, char tipo[], char prueba[]) {
+hash_result hashing(unsigned long key, myreg t_hash[], int tam, char tipo[], char prueba[]) {
   if (strcmp(prueba, "lineal") == 0) {
     return H_lineal(key, t_hash, tam, tipo);
   } else if (strcmp(prueba, "clave") == 0) {
     return H_clave(key, t_hash, tam, tipo);
   }
-  return -3;
+  hash_result result;
+  result.intentos = 0;
+  result.pos = -3;
+  return result;
 }
 
 void h_init(myreg t_hash[], int tam) {
+  printf("Inicializando tabla (%d)\n", tam);
   int i;
   for (i=0; i < tam; i++) {
     t_hash[i].key = LIBRE;
   }
-  printf("Tabla inicializada\n");
+  printf("Tabla inicializada (%d)\n", tam);
 }
 
-int h_insert(myreg r, myreg t_hash[], int tam, char prueba[]) {
-  int pos;
+hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fichero) {
+  hash_result result;
 
+  if (es_fichero == 0)  {
+    printf("Insertando coche \"%s\"...\n", r.matricula);
+  }
   r.key = get_key(r.matricula);
-  pos = hashing(r.key, t_hash, tam, "insert", prueba);
-  if (pos >= 0) {
-    t_hash[pos] = r;
-    printf("Insertado coche \"%s\"\n", r.matricula);
-    return 1;
+  result = hashing(r.key, t_hash, tam, "insert", prueba);
+  if (result.pos >= 0) {
+    t_hash[result.pos] = r;
+    if (es_fichero == 0)  {
+      printf("Coche \"%s\" intertado\n", r.matricula);
+      printf("%d intentos\n", result.intentos);
+    }
+    return result;
   }
   printf("ERROR insertando coche \"%s\"\n", r.matricula);
-  return pos;
+  return result;
 }
 
-int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]) {
+void h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[]) {
   char linea[500]; // Para guardar la linea de cada fichero
   char *token;     // Para cada token de cada linea
   int i;
+  hash_result result;
+  int intentos_totales = 0;
+
+  printf("Insertando fichero %s...\n", nombre_fichero);
 
   //Abrimos el fichero
   FILE *fp = fopen(nombre_fichero,"r");
 
   // Comprobar que no hay error al abrir
   if(fp == NULL) {
-    printf("Error de lectura del archivo");
-    return -1;
+    printf("Error de lectura del archivo %s\n", nombre_fichero);
   }
 
   // Recorremos cada linea del fichero
@@ -79,31 +92,37 @@ int h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba[
       token = strtok(NULL, ",");  // Siguiente token en la linea (si quedan)
       i++;
     }
-    h_insert(reg, t_hash, tam, prueba);
+    result = h_insert(reg, t_hash, tam, prueba, 1);
+    intentos_totales += result.intentos;
 //    system("PAUSE");
   }
-  printf("\n");
-  printf("\n");
-  printf("Fichero insertado en la tabla.\n");
+  printf("Fichero insertado en la tabla (%d).\n", tam);
+  printf("Intentos totales: %d\n", intentos_totales);
   printf("Factor de capacidad: %f\n", h_loadfactor(t_hash, tam));
-  return 0;
 }
 
 int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]) {
-  return hashing(get_key(matricula), t_hash, tam, "search", prueba);
+  hash_result result = hashing(get_key(matricula), t_hash, tam, "search", prueba);
+  if (result.pos >= 0) {
+    printf("Coche \"%s\" encontrado en la posicion %d\n", matricula, result.pos);
+    printf("%d intentos\n", result.intentos);
+    return result.pos;
+  }
+  printf("Coche \"%s\" no encontrado\n", matricula);
+  return -1;
 }
 
-int h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
-  int pos;
+void h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
+  hash_result result;
 
-  pos = hashing(get_key(matricula), t_hash, tam, "remove", prueba);
-  if (pos >= 0) {
-    t_hash[pos].key = BORRADO;
+  result = hashing(get_key(matricula), t_hash, tam, "remove", prueba);
+  if (result.pos >= 0) {
+    t_hash[result.pos].key = BORRADO;
     printf("Borrado coche \"%s\"\n", matricula);
+    printf("%d intentos\n", result.intentos);
     return 1;
   }
   printf("ERROR borrando coche \"%s\"\n", matricula);
-  return pos;
 }
 
 // N/M, donde N es el numero de elemento insertados
@@ -124,6 +143,7 @@ float h_loadfactor(myreg t_hash[], int tam) {
 void h_show(myreg t_hash[], int tam) {
   int i;
 
+  printf("\n========= Tabla lineal =========\n\n");
   for(i = 0; i < tam; i++) {
     if (t_hash[i].key == LIBRE) {
       printf("|   libre");
@@ -133,7 +153,7 @@ void h_show(myreg t_hash[], int tam) {
       printf("| %s", t_hash[i].matricula);
     }
   }
-  printf("|\n");
+  printf("|\n\n");
 }
 
 
