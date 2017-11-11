@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <windows.h>
 
+#include "tiempo.h"
 #include "lineal.h"
 #include "clave.h"
 #include "hashing.h"
@@ -20,18 +22,21 @@ hash_result hashing(unsigned long key, myreg t_hash[], int tam, char tipo[], cha
 }
 
 void h_init(myreg t_hash[], int tam) {
+  empieza_tiempo();
   printf("Inicializando tabla (%d)\n", tam);
   int i;
   for (i=0; i < tam; i++) {
     t_hash[i].key = LIBRE;
   }
   printf("Tabla inicializada (%d)\n", tam);
+  termina_tiempo();
 }
 
 hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fichero) {
   hash_result result;
 
   if (es_fichero == 0)  {
+    empieza_tiempo();
     printf("Insertando coche \"%s\"...\n", r.matricula);
   }
   r.key = get_key(r.matricula);
@@ -41,10 +46,12 @@ hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fic
     if (es_fichero == 0)  {
       printf("Coche \"%s\" intertado\n", r.matricula);
       printf("%d intentos\n", result.intentos);
+      termina_tiempo();
     }
     return result;
   }
   printf("ERROR insertando coche \"%s\"\n", r.matricula);
+  termina_tiempo();
   return result;
 }
 
@@ -55,6 +62,7 @@ void h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba
   hash_result result;
   int intentos_totales = 0;
 
+  empieza_tiempo();
   printf("Insertando fichero %s...\n", nombre_fichero);
 
   //Abrimos el fichero
@@ -99,30 +107,36 @@ void h_insert_fichero(char* nombre_fichero, myreg t_hash[], int tam, char prueba
   printf("Fichero insertado en la tabla (%d).\n", tam);
   printf("Intentos totales: %d\n", intentos_totales);
   printf("Factor de capacidad: %f\n", h_loadfactor(t_hash, tam));
+  termina_tiempo();
 }
 
 int h_search(char matricula[], myreg t_hash[], int tam, char prueba[]) {
   hash_result result = hashing(get_key(matricula), t_hash, tam, "search", prueba);
+  empieza_tiempo();
   if (result.pos >= 0) {
     printf("Coche \"%s\" encontrado en la posicion %d\n", matricula, result.pos);
     printf("%d intentos\n", result.intentos);
+    termina_tiempo();
     return result.pos;
   }
   printf("Coche \"%s\" no encontrado\n", matricula);
+  termina_tiempo();
   return -1;
 }
 
 void h_remove(char matricula[], myreg t_hash[], int tam, char prueba[]) {
   hash_result result;
 
+  empieza_tiempo();
   result = hashing(get_key(matricula), t_hash, tam, "remove", prueba);
   if (result.pos >= 0) {
     t_hash[result.pos].key = BORRADO;
     printf("Borrado coche \"%s\"\n", matricula);
     printf("%d intentos\n", result.intentos);
-    return 1;
+  } else {
+    printf("ERROR borrando coche \"%s\"\n", matricula);
   }
-  printf("ERROR borrando coche \"%s\"\n", matricula);
+  termina_tiempo();
 }
 
 // N/M, donde N es el numero de elemento insertados
