@@ -37,6 +37,7 @@ hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fic
     empieza_tiempo();
     printf("Insertando coche \"%s\"...\n", r.matricula);
   }
+//  printf("Matricula: %s\n", r.matricula);
   r.key = get_key(r.matricula);
   result = hashing(r.key, t_hash, tam, "insert", prueba);
   if (result.pos >= 0) {

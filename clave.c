@@ -20,23 +20,23 @@ hash_result G_clave(unsigned long key, myreg t_hash[], int tam, char tipo[], int
 
   if (i > tam) {
     result.pos = -1;
-    result.intentos = i;
+    result.intentos = i + 1;
     return result; // No se encuentra/No se puede insertar
   }
   if (strcmp(tipo, "insert") == 0) { // Estamos insertando
     if (t_hash[g].key == key) { // Si lo encontramos
       result.pos = -2;
-      result.intentos = i;
+      result.intentos = i + 1;
       return result; // Ya existe
     } else if (t_hash[g].key == LIBRE || t_hash[g].key == BORRADO) { // Si está libre
       result.pos = g; // Devuelvo la posición
-      result.intentos = i;
+      result.intentos = i + 1;
       return result;
     }
   } else { // Si estamos buscando
     if (t_hash[g].key == key) { // Si lo encontramos
       result.pos = g; // Devolvemos la posición
-      result.intentos = i;
+      result.intentos = i + 1;
       return result;
     }
   }
@@ -48,10 +48,10 @@ hash_result H_clave(unsigned long key, myreg t_hash[], int tam, char tipo[]) {
   int h = key % tam;
   int i = 0;
   hash_result result;
-//  printf("----------\n");
 //  printf("H: %d\n", h);
   result = G_clave(key, t_hash, tam, tipo, h, i);
-//  printf("Intentos: %d\n", result.intentos);
+//  printf("POS: %d\n", result.pos);
+//  printf("----------\n");
   return result;
 }
 
