@@ -76,7 +76,7 @@
 
 1510406626 c:\c_projects\hashing\hashing.h
 
-1510416158 source:c:\c_projects\hashing\hashing.c
+1510425211 source:c:\c_projects\hashing\hashing.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -96,10 +96,11 @@
 	<string.h>
 	"lineal.h"
 
-1510419224 source:c:\c_projects\hashing\main.c
+1510477139 source:c:\c_projects\hashing\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"menu.h"
 	"hashing.h"
 
 1509547618 source:c:\c_projects\hashing\fichero.c
@@ -118,4 +119,13 @@
 	<stdio.h>
 	<stdlib.h>
 	"hashing.h"
+
+1510424537 c:\c_projects\hashing\menu.h
+
+1510477399 source:c:\c_projects\hashing\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"menu.h"
 

@@ -22,14 +22,12 @@ hash_result hashing(unsigned long key, myreg t_hash[], int tam, char tipo[], cha
 }
 
 void h_init(myreg t_hash[], int tam) {
-  empieza_tiempo();
   printf("Inicializando tabla (%d)\n", tam);
   int i;
   for (i=0; i < tam; i++) {
     t_hash[i].key = LIBRE;
   }
   printf("Tabla inicializada (%d)\n", tam);
-  termina_tiempo();
 }
 
 hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fichero) {
@@ -49,8 +47,13 @@ hash_result h_insert(myreg r, myreg t_hash[], int tam, char prueba[], int es_fic
       termina_tiempo();
     }
     return result;
+  } else if (result.pos == -2) {
+    printf("ERROR el coche \"%s\" ya esta en la tabla\n", r.matricula);
+  } else if (result.pos == -1) {
+    printf("ERROR tabla llena\n");
+  } else {
+    printf("ERROR insertando coche \"%s\"\n", r.matricula);
   }
-  printf("ERROR insertando coche \"%s\"\n", r.matricula);
   termina_tiempo();
   return result;
 }
